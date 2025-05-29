@@ -1,0 +1,14 @@
+{
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"denoland.vscode-deno"
+			]
+		}
+	},
+	"features": {
+		"ghcr.io/devcontainers-community/features/deno:1": {}
+	},
+	"image": "mcr.microsoft.com/devcontainers/base:bookworm",
+	"name": "workspace"
+}
