@@ -111,37 +111,6 @@ function typecheck(t: Term, tyEnv: TypeEnv): Type {
     }
 }
 
-function typeEq(ty1: Type, ty2: Type): boolean {
-    switch (ty2.tag) {
-        case "Boolean":
-            return ty1.tag === "Boolean";
-        case "Number":
-            return ty1.tag === "Number";
-        case "Func": {
-            if (ty1.tag !== "Func") return false;
-            if (ty1.params.length !== ty2.params.length) return false;
-            for (let i = 0; i < ty1.params.length; i++) {
-                // 仮引数の name の一致は確認しない
-                if (!typeEq(ty1.params[i].type, ty2.params[i].type)) {
-                    return false;
-                }
-            }
-            return typeEq(ty1.retType, ty2.retType);
-        }
-        case "Object": {
-            if (ty1.tag !== "Object") return false;
-            if (ty1.props.length !== ty2.props.length) return false;
-            for (const prop2 of ty2.props) {
-                const prop1 = ty1.props.find((p) => p.name === prop2.name);
-                if (prop1 === undefined || !typeEq(prop1.type, prop2.type)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-    }
-}
-
 function subtype(ty1: Type, ty2: Type): boolean {
     switch (ty2.tag) {
         case "Boolean":
